@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateCertificate1747365505147 implements MigrationInterface {
+export class CreateCertificate1747364190000 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -10,6 +10,8 @@ export class CreateCertificate1747365505147 implements MigrationInterface {
             name: "id",
             type: "uuid",
             isPrimary: true,
+            generationStrategy: "uuid",
+            default: "uuid_generate_v4()",
           },
           {
             name: "publication_date",

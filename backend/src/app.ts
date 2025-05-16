@@ -1,10 +1,10 @@
 import express from "express";
-// import NotificationRouter from "./notification-router";
+import Routers from "./routes";
 
 const app = express();
 
 app.use(express.json());
 
-// NotificationRouter(app);
+Routers(app);
 
 export default app;
