@@ -11,11 +11,21 @@ class StudentsController {
         return;
       }
 
-      await studentsService.importFromXlsx(file.path);
+      const result = await studentsService.importFromXlsx(file.path);
 
-      res
-        .status(200)
-        .json({ message: "Alunos e certificados importados com sucesso." });
+      if (result.errors.length > 0) {
+        res.status(207).json({
+          message: "Importação concluída com alguns erros",
+          successCount: result.successCount,
+          errorCount: result.errors.length,
+          errors: result.errors,
+        });
+      } else {
+        res.status(200).json({
+          message: "Todos os alunos foram importados com sucesso.",
+          successCount: result.successCount,
+        });
+      }
     } catch (err) {
       console.error(err);
       res.status(500).send({ error: "Erro interno ao importar." });

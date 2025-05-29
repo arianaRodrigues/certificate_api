@@ -1,13 +1,8 @@
 import { Router } from "express";
 import studentController from "../controllers/student.controller";
-import path from "path";
-import multer from "multer";
+import { upload } from "../upload";
 
 const studentRouter = Router();
-
-const upload = multer({
-  dest: path.resolve(__dirname, "..", "..", "tmp"),
-});
 
 studentRouter.post(
   "/upload",
